@@ -1,6 +1,14 @@
 define(['angularAMD'], function (angularAMD) {
+
   'use strict';
-  angularAMD.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+
+  angularAMD.config([
+    '$stateProvider',
+    '$urlRouterProvider',
+    configureRoutes
+  ]);
+
+  function configureRoutes ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
       .state('users.list', {
@@ -21,6 +29,5 @@ define(['angularAMD'], function (angularAMD) {
     $urlRouterProvider
       .when('/users', '/users/list');
 
-  }]);
-
+  }
 });

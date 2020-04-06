@@ -1,8 +1,18 @@
 define(['common'], function (angularAMD) {
-  'use strict';
-  var app = angular.module('angularAmdSample', ['ui.router', 'ngResource']);
 
-  app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+  'use strict';
+
+  var app = angular.module('angularAmdSample', [
+    'ui.router'
+  ]);
+
+  app.config([
+    '$stateProvider',
+    '$urlRouterProvider',
+    configureRoutes
+ ]);
+
+ function configureRoutes ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
       .state('home', angularAMD.route({
@@ -27,7 +37,7 @@ define(['common'], function (angularAMD) {
       .otherwise('/home');
 
 
-  }]);
+  }
 
   return angularAMD.bootstrap(app);
 });

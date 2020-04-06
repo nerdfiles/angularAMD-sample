@@ -1,6 +1,13 @@
 define(['angularAMD'], function (angularAMD) {
   'use strict';
-  angularAMD.controller('navMenuController', ['$scope', '$state', function ($scope, $state) {
+
+  angularAMD.controller('navMenuController', [
+    '$scope',
+    '$state',
+    navMenuController
+  ]);
+
+  function navMenuController ($scope, $state) {
     $scope.isTabActive = function (tabName) {
       // Check if there is sub-states
       var stateName = $state.current.name,
@@ -14,7 +21,7 @@ define(['angularAMD'], function (angularAMD) {
         return 'active';
       }
     };
-  }]);
+  }
 
   angularAMD.directive('navMenu', function () {
     return {
