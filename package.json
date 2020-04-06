@@ -1,6 +1,12 @@
 {
   "name": "angularAmdSample",
   "version": "0.0.0",
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "resolutions": {
+    "graceful-fs": "4.2.3"
+  },
   "dependencies": {
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^0.7.3",
