@@ -43,6 +43,15 @@ module.exports = function (grunt) {
           }
         ]
       },
+      deployIos: {
+        files: [
+          {
+            cwd: '<%= cvars.build %>/', expand: true,
+            dest: '<%= cvars.distIos %>/',
+            src: ['<%= cvars.appcss %>/**', 'images/**']
+          }
+        ]
+      },
       build: {
         files: [
           {
@@ -66,8 +75,11 @@ module.exports = function (grunt) {
       options: { force: true },
       build: ['<%= cvars.build %>'],
       'post-requirejs': ['<%= cvars.build %>/<%= cvars.appjs %>/ext'],
+      deployIos: [
+        '<%= cvars.distIos %>/*'
+      ],
       deploy: [
-        '<%= cvars.dist %>/*'
+        '<%= cvars.distIos %>/*'
       ]
     },
     cssmin: {
@@ -106,6 +118,24 @@ module.exports = function (grunt) {
             cwd: '<%= cvars.app %>/views/', expand: true, flatten: false,
             dest: '<%= cvars.build %>/views/',
             src: ['*.html']
+          }
+        ]
+      },
+      deployIos: {
+        options: {
+          collapseWhitespace: true
+        },
+        files: [
+          { '<%= cvars.distIos %>/index.html': '<%= cvars.build %>/index.html' },
+          {
+            cwd: '<%= cvars.build %>/<%= cvars.appjs %>/main/templates/', expand: true,
+            dest: '<%= cvars.distIos %>/<%= cvars.appjs %>/main/templates/',
+            src: ['*.html']
+          },
+          {
+            cwd: '<%= cvars.build %>/views/', expand: true,
+            dest: '<%= cvars.distIos %>/views/',
+            src: ['**/*.html']
           }
         ]
       },
@@ -156,6 +186,20 @@ module.exports = function (grunt) {
       }
     },
     uglify: {
+      deployIos: {
+        options: {
+          preserveComments: 'some',
+          sourceMapIncludeSources: true,
+          sourceMap: true
+        },
+        files: [
+          {
+            cwd: '<%= cvars.build %>/<%= cvars.appjs %>/', expand: true,
+            dest: '<%= cvars.distIos %>/<%= cvars.appjs %>/',
+            src: '**/*.js'
+          }
+        ]
+      },
       deploy: {
         options: {
           preserveComments: 'some',
@@ -229,7 +273,7 @@ module.exports = function (grunt) {
    * Use r.js to build the project
    */
   grunt.registerTask('build', [
-    'jshint:build',
+    //'jshint:build',
     'clean:build',
     'preprocess:build',
     'htmlmin:build',
@@ -239,6 +283,17 @@ module.exports = function (grunt) {
     'copy:build'
   ]);
 
+  /**
+   * deploy task
+   * Deploy to dist_www directory
+   */
+  grunt.registerTask('deploy/ios', [
+    'build',
+    'clean:deployIos',
+    'htmlmin:deployIos',
+    'copy:deployIos',
+    'uglify:deployIos'
+  ]);
 
   /**
    * deploy task

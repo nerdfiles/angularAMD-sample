@@ -5,19 +5,20 @@
     "appjs": "scripts",
     "appcss": "styles",
     "build": "build",
+    "distIos": "ios/www",
     "dist": "dist",
     "hostname": "localhost",
     "port": 8080
   },
   "bowerFiles": [
     "angular/angular.js",
-    "angular-route/angular-route.js",
     "angularAMD/angularAMD.js",
     "angularAMD/ngload.js",
     "requirejs/require.js",
+    "bootstrap/dist/js/bootstrap.js",
+    "jquery/dist/jquery.js",
     "es5-shim/es5-shim.js",
     "json3/lib/json3.js",
-    "angular-resource/angular-resource.js",
     "angular-ui-router/release/angular-ui-router.js"
   ],
   "cssFiles": [
