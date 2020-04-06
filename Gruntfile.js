@@ -43,11 +43,11 @@ module.exports = function (grunt) {
           }
         ]
       },
-      deployIos: {
+      deployMobile: {
         files: [
           {
             cwd: '<%= cvars.build %>/', expand: true,
-            dest: '<%= cvars.distIos %>/',
+            dest: '<%= cvars.distMobile %>/',
             src: ['<%= cvars.appcss %>/**', 'images/**']
           }
         ]
@@ -75,11 +75,11 @@ module.exports = function (grunt) {
       options: { force: true },
       build: ['<%= cvars.build %>'],
       'post-requirejs': ['<%= cvars.build %>/<%= cvars.appjs %>/ext'],
-      deployIos: [
-        '<%= cvars.distIos %>/*'
+      deployMobile: [
+        '<%= cvars.distMobile %>/*'
       ],
       deploy: [
-        '<%= cvars.distIos %>/*'
+        '<%= cvars.distMobile %>/*'
       ]
     },
     cssmin: {
@@ -121,20 +121,20 @@ module.exports = function (grunt) {
           }
         ]
       },
-      deployIos: {
+      deployMobile: {
         options: {
           collapseWhitespace: true
         },
         files: [
-          { '<%= cvars.distIos %>/index.html': '<%= cvars.build %>/index.html' },
+          { '<%= cvars.distMobile %>/index.html': '<%= cvars.build %>/index.html' },
           {
             cwd: '<%= cvars.build %>/<%= cvars.appjs %>/main/templates/', expand: true,
-            dest: '<%= cvars.distIos %>/<%= cvars.appjs %>/main/templates/',
+            dest: '<%= cvars.distMobile %>/<%= cvars.appjs %>/main/templates/',
             src: ['*.html']
           },
           {
             cwd: '<%= cvars.build %>/views/', expand: true,
-            dest: '<%= cvars.distIos %>/views/',
+            dest: '<%= cvars.distMobile %>/views/',
             src: ['**/*.html']
           }
         ]
@@ -186,7 +186,7 @@ module.exports = function (grunt) {
       }
     },
     uglify: {
-      deployIos: {
+      deployMobile: {
         options: {
           preserveComments: 'some',
           sourceMapIncludeSources: true,
@@ -195,7 +195,7 @@ module.exports = function (grunt) {
         files: [
           {
             cwd: '<%= cvars.build %>/<%= cvars.appjs %>/', expand: true,
-            dest: '<%= cvars.distIos %>/<%= cvars.appjs %>/',
+            dest: '<%= cvars.distMobile %>/<%= cvars.appjs %>/',
             src: '**/*.js'
           }
         ]
@@ -285,19 +285,19 @@ module.exports = function (grunt) {
 
   /**
    * deploy task
-   * Deploy to dist_www directory
+   * Deploy to mobile_www directory
    */
-  grunt.registerTask('deploy/ios', [
+  grunt.registerTask('deploy/mobile', [
     'build',
-    'clean:deployIos',
-    'htmlmin:deployIos',
-    'copy:deployIos',
-    'uglify:deployIos'
+    'clean:deployMobile',
+    'htmlmin:deployMobile',
+    'copy:deployMobile',
+    'uglify:deployMobile'
   ]);
 
   /**
    * deploy task
-   * Deploy to dist_www directory
+   * Deploy to dist directory
    */
   grunt.registerTask('deploy', [
     'build',
@@ -307,8 +307,16 @@ module.exports = function (grunt) {
     'uglify:deploy'
   ]);
 
-  grunt.registerTask('hello', function () {
-    grunt.log.write('hello task called with: ', gruntConfig);
+  grunt.registerTask('default', function () {
+    grunt.log.write('Configured to: ', gruntConfig);
+    grunt.log.write(`
+      USAGE:
+        $ grunt setup
+        $ grunt devel
+        $ grunt build
+        $ grunt deploy
+        $ grunt deploy/mobile # (cordova)
+    `);
   });
 
 };

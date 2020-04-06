@@ -10,9 +10,27 @@ define(['common'], function (angularAMD) {
     '$stateProvider',
     '$urlRouterProvider',
     configureRoutes
- ]);
+  ]);
 
- function configureRoutes ($stateProvider, $urlRouterProvider) {
+  var onChangeConfig = [
+    '$rootScope',
+    '$state',
+    function ($rootScope, $state) {
+
+      $rootScope.$on('$stateChangeStart', function (event, toState) {
+        if (toState.name === "users") {
+          event.preventDefault();
+          $state.go('users.list');
+        }
+      });
+
+    }
+  ];
+
+  app
+    .run(onChangeConfig);
+
+  function configureRoutes ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
       .state('home', angularAMD.route({
@@ -30,12 +48,15 @@ define(['common'], function (angularAMD) {
         templateUrl: 'views/users.html',
         controllerUrl: 'users/users_ctrl'
       }))
-    ;
+      // To configure default subroute
+      .state('users.list', {
+        url: '/list',
+        templateUrl: 'views/users/list.html'
+      });
 
     // Else
     $urlRouterProvider
       .otherwise('/home');
-
 
   }
 

@@ -1,4 +1,4 @@
-define(['angularAMD'], function (angularAMD) {
+define(['angularAMD', 'app'], function (angularAMD, app) {
 
   'use strict';
 
@@ -6,15 +6,11 @@ define(['angularAMD'], function (angularAMD) {
     '$stateProvider',
     '$urlRouterProvider',
     configureRoutes
-  ]);
+  ])
 
   function configureRoutes ($stateProvider, $urlRouterProvider) {
 
     $stateProvider
-      .state('users.list', {
-        url: '/list',
-        templateUrl: 'views/users/list.html'
-      })
       .state('users.search', {
         url: '/search',
         templateUrl: 'views/users/search.html'
@@ -22,12 +18,6 @@ define(['angularAMD'], function (angularAMD) {
       .state('users.favorites', {
         url: '/favorites',
         templateUrl: 'views/users/favorites.html'
-      })
-    ;
-
-    // Else -- This is not working for some reason:
-    $urlRouterProvider
-      .when('/users', '/users/list');
-
+      });
   }
 });

@@ -5,7 +5,7 @@
     "appjs": "scripts",
     "appcss": "styles",
     "build": "build",
-    "distIos": "ios/www",
+    "distMobile": "mobile/www",
     "dist": "dist",
     "hostname": "localhost",
     "port": 8080
