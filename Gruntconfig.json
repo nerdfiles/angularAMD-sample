@@ -11,6 +11,8 @@
     "port": 8080
   },
   "bowerFiles": [
+    "lodash/dist/lodash.min.js",
+    "restangular/dist/restangular.js",
     "angular/angular.js",
     "angularAMD/angularAMD.js",
     "angularAMD/ngload.js",

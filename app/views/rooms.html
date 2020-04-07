@@ -1,2 +1,10 @@
 <h1>{{message}}</h1>
 <h3>{{rooms}}</h3>
+<div if-ng="error">
+  <h2>There was an error getting channels</h2>
+  <p>
+    <span>{{error.status}}</span>
+    <span>:</span>
+    <span>{{error.data}}</span>
+  </p>
+</div>

@@ -3,6 +3,8 @@ require.config({
 
   // alias libraries paths.  Must set 'angular'
   paths: {
+    'lodash'            : 'ext/lodash.min',
+    'restangular'       : 'ext/restangular',
     'angular'           : 'ext/angular',
     'angular-ui-router' : 'ext/angular-ui-router',
     'angularAMD'        : 'ext/angularAMD',
@@ -13,6 +15,10 @@ require.config({
 
   // Add angular modules that does not support AMD out of the box, put it in a shim
   shim: {
+    'angular': {
+      exports: 'angular'
+    },
+    'restangular'       : [ 'angular', 'lodash' ],
     'angularAMD'        : [ 'angular' ],
     'bootstrap'         : [ 'jquery' ],
     'ngload'            : [ 'angularAMD' ],

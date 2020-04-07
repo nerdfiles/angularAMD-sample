@@ -3,6 +3,7 @@ define([
   'angular',
   'angular-ui-router',
   'bootstrap',
+  'restangular',
   'main/nav_service'
 ], function (angularAMD) {
 

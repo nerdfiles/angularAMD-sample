@@ -3,13 +3,21 @@ define(['common'], function (angularAMD) {
   'use strict';
 
   var app = angular.module('angularAmdSample', [
-    'ui.router'
+    'ui.router',
+    'restangular'
   ]);
 
   app.config([
     '$stateProvider',
     '$urlRouterProvider',
     configureRoutes
+  ]);
+
+  app.config([
+    'RestangularProvider',
+    function(RestangularProvider) {
+      RestangularProvider.setBaseUrl('/api/v1');
+    }
   ]);
 
   var onChangeConfig = [
